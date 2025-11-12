@@ -6,9 +6,16 @@ export const Stack = contentstack.Stack({
   environment: process.env.CONTENTSTACK_ENVIRONMENT!,
 });
 
-export const getPageData = async (entry: string) => {
-  const Query = Stack.ContentType(entry).Query();
+export const getPageData = async () => {
+  const Query = Stack.ContentType("page").Query();
   const result = await Query.toJSON().find();
   const [entries] = result;
   return entries[0]; // Homeページ想定
+};
+
+export const getArticlesData = async () => {
+  const Query = Stack.ContentType("articles").Query();
+  const result = await Query.toJSON().find();
+  const [entries] = result;
+  return entries;
 };
